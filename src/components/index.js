@@ -1,7 +1,7 @@
 import './pages/index.css'; // добавьте импорт главного файла стилей
-import {initialCards} from './scripts/cards';
-import {openModalProfile, handleEscCloseProfile, closeModalProfile, openModalPlus, handleEscClosePlus, closeModalPlus, openModalImage, handleEscCloseImage, closeModalImage} from './scripts/modals';
-import {handleFormSubmitProfile, handleFormSubmitPlus, createCard, deleteCard, pressLike, showCard} from './scripts/card';
+import {initialCards} from '../scripts/cards';
+import {openModalProfile, handleEscCloseProfile, closeModalProfile, openModalPlus, handleEscClosePlus, closeModalPlus, openModalImage, handleEscCloseImage, closeModalImage} from '../scripts/modals';
+import {handleFormSubmitProfile, handleFormSubmitPlus, createCard, deleteCard, pressLike, showCard} from '../scripts/card';
 
 // Константы и обработчики события для модального окна редактирования профиля //
 const popupTypeEdit = document.querySelector('.popup_type_edit');
@@ -10,8 +10,8 @@ popupTypeEdit.classList.add("popup_is-animated");
 const profileEditButton = document.querySelector('.profile__edit-button');
 profileEditButton.addEventListener('click', openModalProfile);
 
-const closeProfile = popupTypeEdit.querySelector('.popup__close');
-closeProfile.addEventListener('click', closeModalProfile);
+const buttonClosePopupProfile = popupTypeEdit.querySelector('.popup__close');
+buttonClosePopupProfile.addEventListener('click', closeModalProfile);
 
 popupTypeEdit.addEventListener("click", (event) => {
   if (event.currentTarget === event.target) {

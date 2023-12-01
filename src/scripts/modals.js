@@ -1,4 +1,4 @@
-import {popupTypeEdit, popupTypeNewCard, popupTypeImage} from '../index';
+import {popupTypeEdit, popupTypeNewCard, popupTypeImage} from '../components/index';
 
 // Открытие модального окна на кнопку Редактировать профиль //
 function openModalProfile() {
