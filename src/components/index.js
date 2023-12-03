@@ -1,4 +1,4 @@
-import './pages/index.css';
+import '../pages/index.css';
 import {initialCards} from './cards';
 import {openPopup, closePopup} from './modals';
 import {createCard, deleteCard, pressLike} from './card';
