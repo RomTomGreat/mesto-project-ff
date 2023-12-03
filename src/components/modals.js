@@ -22,4 +22,4 @@ function closePopup(popup) {
   popup.removeEventListener("click", handleCloseModalWindowOverlayClick);
 }
 
-export {openPopup, closeEscPopup, handleCloseModalWindowOverlayClick, closePopup};
+export {openPopup, closePopup};

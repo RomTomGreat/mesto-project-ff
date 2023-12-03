@@ -1,7 +1,7 @@
-import './pages/index.css'; // добавьте импорт главного файла стилей
-import {initialCards} from './scripts/cards';
-import {openPopup, closeEscPopup, handleCloseModalWindowOverlayClick, closePopup} from './scripts/modals';
-import {createCard, deleteCard, pressLike} from './scripts/card';
+import './pages/index.css';
+import {initialCards} from './cards';
+import {openPopup, closePopup} from './modals';
+import {createCard, deleteCard, pressLike} from './card';
 
 const popupTypeEdit = document.querySelector('.popup_type_edit');
 popupTypeEdit.classList.add("popup_is-animated");
@@ -14,7 +14,6 @@ const profileTitle = document.querySelector('.profile__title');
 const profileDescription = document.querySelector('.profile__description');
 const profileEditButton = document.querySelector('.profile__edit-button');
 const profileAddButton = document.querySelector('.profile__add-button');
-const buttonClosePopup = document.querySelector('.popup__close');
 const popupImage = document.querySelector('.popup__image');
 const popupImageCaption = document.querySelector('.popup__caption');
 // Находим 1 форму в DOM //
@@ -52,7 +51,7 @@ function handleFormSubmitProfile(evt) {
   profileTitle.textContent = newNameInput;
   profileDescription.textContent = newDescriptionInput;
   
-  document.forms["edit-profile"].reset();
+  formAddNewProfile.reset();
   closePopup(popupTypeEdit);
 }
 
@@ -71,7 +70,7 @@ function handleSubmitAddNewCard(evt) {
   const newAddCard = createCard(newCard, deleteCard, pressLike, showCard);
   cardPlaceList.prepend(newAddCard);
 
-  document.forms["new-place"].reset();
+  formAddNewCard.reset();
   closePopup(popupTypeNewCard);
 }
 
@@ -85,14 +84,8 @@ function openPopupAddNewCard() {
   openPopup(popupTypeNewCard);
 }
 
-function closePopupModal() {
-  closePopup(popupTypeEdit);
-}
-
 formAddNewProfile.addEventListener('submit', handleFormSubmitProfile);
 formAddNewCard.addEventListener('submit', handleSubmitAddNewCard);
 
 profileEditButton.addEventListener('click', openPopupProfile);
 profileAddButton.addEventListener('click', openPopupAddNewCard);
-
-buttonClosePopup.addEventListener('click', closePopupModal);
