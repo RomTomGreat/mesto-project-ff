@@ -34,4 +34,9 @@
 .profile__avatar-button:hover {
   z-index: 2;
   cursor: pointer;
+  background: rgba(0, 0, 0, 0.80);
+  background-image: url(/src/images/edit-avatar.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 36px;
 }

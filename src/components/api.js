@@ -6,19 +6,20 @@ const config = {
   }
 }
 
+function getResponseData(result) {
+  if (result.ok) {
+    return result.json();
+  } else {
+    return Promise.reject(`Ошибка: ${result.status}`);
+  }
+}
+
 export const getUserData = () => {
   return fetch(`${config.baseUrl}/users/me`, {
     method: 'GET',
     headers: config.headers
   })
-  
-  .then((result) => {
-    if (result.ok) {
-      return result.json();
-    } else {
-      return Promise.reject(`Ошибка: ${result.status}`);
-    }
-  })
+  .then(getResponseData);
 }
 
 export const getInitialCards = () => {
@@ -26,14 +27,7 @@ export const getInitialCards = () => {
     method: 'GET',
     headers: config.headers
   })
-  
-  .then((result) => {
-    if (result.ok) {
-      return result.json();
-    } else {
-      return Promise.reject(`Ошибка: ${result.status}`);
-    }
-  })
+  .then(getResponseData);
 }
 
 export const editMyProfile = (inputName, inputDescription) => {
@@ -45,14 +39,7 @@ export const editMyProfile = (inputName, inputDescription) => {
       about: inputDescription
     })
   })
-
-  .then((result) => {
-    if (result.ok) {
-      return result.json();
-    } else {
-      return Promise.reject(`Ошибка: ${result.status}`);
-    }
-  })
+  .then(getResponseData);
 }
 
 export const createCardNew = (data) => {
@@ -61,14 +48,7 @@ export const createCardNew = (data) => {
     headers: config.headers,
     body: JSON.stringify(data)
   })
-
-  .then((result) => {
-    if (result.ok) {
-      return result.json();
-    } else {
-      return Promise.reject(`Ошибка: ${result.status}`);
-    }
-  })
+  .then(getResponseData);
 }
 
 export const clickOnLike = (id, isLiked) => {
@@ -76,14 +56,7 @@ export const clickOnLike = (id, isLiked) => {
     method: isLiked ? 'DELETE' : 'PUT',
     headers: config.headers
   })
-
-  .then((result) => {
-    if (result.ok) {
-      return result.json();
-    } else {
-      return Promise.reject(`Ошибка: ${result.status}`);
-    }
-  })
+  .then(getResponseData);
 }
 
 export const deleteMyCard = (data) => {
@@ -91,14 +64,7 @@ export const deleteMyCard = (data) => {
     method: 'DELETE',
     headers: config.headers
   })
-
-  .then((result) => {
-    if (result.ok) {
-      return result.json();
-    } else {
-      return Promise.reject(`Ошибка: ${result.status}`);
-    }
-  })
+  .then(getResponseData);
 }
 
 export const updateMyAvatar = (data) => {
@@ -107,12 +73,5 @@ export const updateMyAvatar = (data) => {
     headers: config.headers,
     body: JSON.stringify(data)
   })
-
-  .then((result) => {
-    if (result.ok) {
-      return result.json();
-    } else {
-      return Promise.reject(`Ошибка: ${result.status}`);
-    }
-  })
+  .then(getResponseData);
 }

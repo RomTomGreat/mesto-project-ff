@@ -22,8 +22,6 @@ const profileAvatarButton = document.querySelector('.profile__avatar-button');
 
 const popupImage = document.querySelector('.popup__image');
 const popupImageCaption = document.querySelector('.popup__caption');
-
-let userAvatar = "";
 let userId = "";
 
 const formAddNewProfile = document.forms["edit-profile"];
@@ -35,6 +33,8 @@ const descriptionInputPlus = document.querySelector('.popup__input_type_url');
 const formAddNewAvatar = document.forms["edit-avatar"];
 const nameInputAvatar = document.querySelector('.popup__input_type_avatar');
   
+// Темплейт карточки //
+export const cardTemplate = document.querySelector('#card-template').content;
 const cardPlaceList = document.querySelector('.places__list');
 
 export const validationConfig = {
@@ -68,6 +68,7 @@ function handleFormSubmitProfile(evt) {
   .catch((error) => {
     console.log(error);
   })
+  .finally(() => rendering(evt.submitter, 'Сохранить'));
 }
 
 function handleFormSubmitAddNewCard(evt) {
@@ -90,6 +91,7 @@ function handleFormSubmitAddNewCard(evt) {
   .catch((error) => {
     console.log(error);
   })
+  .finally(() => rendering(evt.submitter, 'Сохранить'));
 }
 
 function handleFormSubmitAvatar(evt) {
@@ -100,12 +102,12 @@ function handleFormSubmitAvatar(evt) {
   updateMyAvatar({ avatar: nameInputAvatar.value })
   .then((data) => {
     profileAvatar.style = `background-image: url(${data.avatar})`;
-    userAvatar = data.avatar;
     closePopup(popupTypeAvatar);
   })
   .catch((error) => {
     console.log(error);
   })
+  .finally(() => rendering(evt.submitter, 'Сохранить'));
 }
 
 function pressLike(id, isLiked, changeLike) {
@@ -120,8 +122,8 @@ function pressLike(id, isLiked, changeLike) {
 
 function deleteCards(id, deleteCard) {
   deleteMyCard(id)
-    .then((data) => {
-      deleteCard(data);
+    .then(() => {
+      deleteCard();
     })
     .catch((error) => {
       console.log(error);
@@ -150,12 +152,11 @@ function openPopupAddNewCard() {
 function openPopupAvatar() {
   clearValidation(popupTypeAvatar, validationConfig);
   openPopup(popupTypeAvatar);
-  nameInputAvatar.value = userAvatar;
+  nameInputAvatar.value = "";
 }
 
 Promise.all([getInitialCards(), getUserData()])
   .then(([cards, userData]) => {
-    userAvatar = userData.avatar;
     userId = userData._id;
     profileTitle.textContent = userData.name;
     profileDescription.textContent = userData.about;
